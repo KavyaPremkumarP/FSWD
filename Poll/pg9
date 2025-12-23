@@ -1,0 +1,58 @@
+Poll.jsx
+
+function Poll({ options, onVote }) {
+  return (
+    <div>
+      {Object.keys(options).map((option) => (
+        <button key={option} onClick={() => onVote(option)}>
+          Vote {option}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default Poll;
+
+
+App.jsx
+
+import { useState } from "react";
+import Poll from "./Poll";
+import "./App.css";
+
+function App() {
+  const pollQuestion = "Which subject do you like most?";
+
+  const [votes, setVotes] = useState({
+    Math: 0,
+    Science: 0,
+    English: 0,
+    Computer: 0,
+  });
+
+  const voteHandler = (option) => {
+    setVotes({
+      ...votes,
+      [option]: votes[option] + 1,
+    });
+  };
+
+  return (
+    <div className="app">
+      <h1>Classroom Poll</h1>
+      <h2>{pollQuestion}</h2>
+
+      <Poll options={votes} onVote={voteHandler} />
+
+      <h3>Live Results</h3>
+      {Object.keys(votes).map((key) => (
+        <p key={key}>
+          {key}: {votes[key]} votes
+        </p>
+      ))}
+    </div>
+  );
+}
+
+export default App;
