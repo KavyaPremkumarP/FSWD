@@ -1,0 +1,43 @@
+CourseEnroll.jsx
+
+import { useState } from "react";
+
+export default function CourseEnroll() {
+  const [course, setCourse] = useState("");
+  const [enrolled, setEnrolled] = useState([]);
+
+  const enroll = (e) => {
+    e.preventDefault();
+    setEnrolled([...enrolled, course]);
+    setCourse("");
+  };
+
+  return (
+    <>
+      <h3>Course Enrollment</h3>
+
+      <form onSubmit={enroll}>
+        <input
+          value={course}
+          onChange={(e) => setCourse(e.target.value)}
+          placeholder="Enter course name"
+          required
+        />
+        <button>Enroll</button>
+      </form>
+
+      <h4>Enrolled Courses</h4>
+      {enrolled.map((c, i) => (
+        <p key={i}>{c}</p>
+      ))}
+    </>
+  );
+}
+
+App.jsx
+import CourseEnroll from "./core concepts/helloworld/CourseEnroll";
+
+export default function App() {
+  return <CourseEnroll />;
+}
+
