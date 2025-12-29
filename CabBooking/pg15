@@ -1,0 +1,52 @@
+CabBooking.jsx
+
+function CabBooking() {
+  const bookCab = () => {
+    const name = prompt("Enter Passenger Name:");
+    if (!name) {
+      alert("Booking cancelled!");
+      return;
+    }
+
+    const pickup = prompt("Enter Pickup Location:");
+    const drop = prompt("Enter Drop Location:");
+    const cabType = prompt("Enter Cab Type (Mini / Sedan / SUV):");
+
+    const confirmBooking = confirm(
+      "Confirm Cab Booking Details:\n\n" +
+      "Passenger Name: " + name +
+      "\nPickup Location: " + pickup +
+      "\nDrop Location: " + drop +
+      "\nCab Type: " + cabType
+    );
+
+    if (confirmBooking) {
+      alert(
+        "✅ Cab Booked Successfully!\n" +
+        "Driver will arrive soon.\n" +
+        "Have a safe journey, " + name + " 🚕"
+      );
+    } else {
+      alert("❌ Cab Booking Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Online Cab Booking Application</h2>
+      <button onClick={bookCab}>Book Cab</button>
+    </div>
+  );
+}
+
+export default CabBooking;
+
+App.jsx
+import CabBooking from "./core concepts/helloworld/CabBooking";
+
+function App() {
+  return <CabBooking />;
+}
+
+export default App;
+
