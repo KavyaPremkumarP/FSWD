@@ -1,0 +1,81 @@
+FeedbackSystem.jsx
+
+import { useState } from "react";
+
+function FeedbackSystem() {
+  const [feedback, setFeedback] = useState({ name: "", rating: "", comment: "" });
+  const [submitted, setSubmitted] = useState([]);
+
+  const handleChange = (e) => {
+    setFeedback({ ...feedback, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!feedback.name || !feedback.rating || !feedback.comment) {
+      alert("Please fill all fields!");
+      return;
+    }
+
+    setSubmitted([...submitted, feedback]);
+    setFeedback({ name: "", rating: "", comment: "" });
+  };
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "400px" }}>
+      <h3>Student Feedback</h3>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={feedback.name}
+          onChange={handleChange}
+        /><br /><br />
+
+        <label>Rating (1-5): </label>
+        <select name="rating" value={feedback.rating} onChange={handleChange}>
+          <option value="">Select Rating</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select><br /><br />
+
+        <textarea
+          name="comment"
+          placeholder="Your Comments"
+          value={feedback.comment}
+          onChange={handleChange}
+        ></textarea><br /><br />
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+
+      <h4>Submitted Feedback</h4>
+      {submitted.length === 0 ? (
+        <p>No feedback yet.</p>
+      ) : (
+        submitted.map((f, i) => (
+          <div key={i} style={{ border: "1px solid #ccc", padding: "10px", marginTop: "10px" }}>
+            <p><b>Name:</b> {f.name}</p>
+            <p><b>Rating:</b> {f.rating}</p>
+            <p><b>Comment:</b> {f.comment}</p>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+export default FeedbackSystem;
+
+App.jsx
+import FeedbackSystem from "./core concepts/helloworld/FeedbackSystem";
+
+function App() {
+  return <FeedbackSystem />;
+}
+
+export default App;
