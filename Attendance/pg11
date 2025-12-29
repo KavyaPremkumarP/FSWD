@@ -1,0 +1,38 @@
+Attendance.jsx
+
+import { useState } from "react";
+
+export default function Attendance() {
+  const students = ["Kavya", "Rahul", "Ananya", "Rohit"];
+  const [status, setStatus] = useState({});
+
+  const mark = (name) => {
+    setStatus({
+      ...status,
+      [name]: status[name] === "Present" ? "Absent" : "Present"
+    });
+  };
+
+  return (
+    <>
+      <h3>Attendance Tracker</h3>
+
+      {students.map((s) => (
+        <div key={s}>
+          <span>{s}</span>
+          <button onClick={() => mark(s)}>Mark</button>
+          <span> : {status[s] || "Absent"}</span>
+        </div>
+      ))}
+    </>
+  );
+}
+
+App.jsx
+
+import Attendance from "./core concepts/helloworld/Attendance";
+
+export default function App() {
+  return <Attendance />;
+}
+
