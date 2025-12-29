@@ -1,0 +1,50 @@
+HotelReservation.jsx
+
+function HotelReservation() {
+  const reserveRoom = () => {
+    const name = prompt("Enter Guest Name:");
+    if (!name) {
+      alert("Reservation cancelled!");
+      return;
+    }
+
+    const roomType = prompt("Enter Room Type (Single / Double / Deluxe):");
+    const nights = prompt("Enter Number of Nights:");
+    const guests = prompt("Enter Number of Guests:");
+
+    const confirmReservation = confirm(
+      "Confirm Reservation Details:\n\n" +
+      "Guest Name: " + name +
+      "\nRoom Type: " + roomType +
+      "\nNumber of Nights: " + nights +
+      "\nGuests: " + guests
+    );
+
+    if (confirmReservation) {
+      alert(
+        "✅ Room Reserved Successfully!\n" +
+        "Welcome, " + name + " 🏨"
+      );
+    } else {
+      alert("❌ Reservation Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Hotel Reservation System</h2>
+      <button onClick={reserveRoom}>Reserve Room</button>
+    </div>
+  );
+}
+
+export default HotelReservation;
+
+App.jsx
+import HotelReservation from "./core concepts/helloworld/HotelReservation";
+
+function App() {
+  return <HotelReservation />;
+}
+
+export default App;
