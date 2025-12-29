@@ -1,0 +1,41 @@
+Feedback.jsx
+
+import { useState } from "react";
+
+export default function Feedback() {
+  const [text, setText] = useState("");
+  const [list, setList] = useState([]);
+
+  const submit = (e) => {
+    e.preventDefault();
+    setList([...list, text]);
+    setText("");
+  };
+
+  return (
+    <>
+      <form onSubmit={submit}>
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Enter feedback"
+          required
+        />
+        <button>Submit</button>
+      </form>
+
+      {list.map((item, i) => (
+        <p key={i}>{item}</p>
+      ))}
+    </>
+  );
+}
+
+App.jsx
+
+import Feedback from "./core concepts/helloworld/Feedback";
+
+export default function App() {
+  return <Feedback />;
+}
+
