@@ -1,0 +1,48 @@
+NotificationDashboard.jsx
+
+import { useState } from "react";
+
+function NotificationDashboard() {
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = (message) => {
+    setNotifications([...notifications, message]);
+  };
+
+  return (
+    <div style={{ padding: "20px", width: "400px" }}>
+      <h3>Dashboard Notifications</h3>
+
+      <button onClick={() => addNotification("📩 New message received")}>
+        New Message
+      </button>{" "}
+      <button onClick={() => addNotification("⚠️ System update available")}>
+        System Alert
+      </button>{" "}
+      <button onClick={() => addNotification("✅ Task completed successfully")}>
+        Task Update
+      </button>
+
+      <h4>Notifications</h4>
+
+      {notifications.length === 0 ? (
+        <p>No notifications</p>
+      ) : (
+        notifications.map((note, index) => (
+          <p key={index}>{note}</p>
+        ))
+      )}
+    </div>
+  );
+}
+
+export default NotificationDashboard;
+
+App.jsx
+import NotificationDashboard from "./core concepts/helloworld/NotificationDashboard";
+function App() {
+  return <NotificationDashboard />;
+}
+
+export default App;
+
