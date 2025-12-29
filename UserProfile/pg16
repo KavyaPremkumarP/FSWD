@@ -1,0 +1,86 @@
+UserProfile.jsx
+import { useState } from "react";
+
+function UserProfile() {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    age: ""
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Simple validation
+    if (user.name === "" || user.email === "" || user.age === "") {
+      setError("All fields are required!");
+      return;
+    }
+
+    if (!user.email.includes("@")) {
+      setError("Enter a valid email!");
+      return;
+    }
+
+    if (user.age <= 0) {
+      setError("Enter a valid age!");
+      return;
+    }
+
+    setError("");
+    alert("✅ Profile Updated Successfully!");
+  };
+
+  return (
+    <div style={{ padding: "20px", width: "300px" }}>
+      <h3>Edit User Profile</h3>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          name="name"
+          placeholder="Name"
+          value={user.name}
+          onChange={handleChange}
+        /><br /><br />
+
+        <input
+          name="email"
+          placeholder="Email"
+          value={user.email}
+          onChange={handleChange}
+        /><br /><br />
+
+        <input
+          name="age"
+          type="number"
+          placeholder="Age"
+          value={user.age}
+          onChange={handleChange}
+        /><br /><br />
+
+        <button>Update Profile</button>
+      </form>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </div>
+  );
+}
+
+export default UserProfile;
+
+
+App.jsx
+
+import UserProfile from "./UserProfile";
+
+function App() {
+  return <UserProfile />;
+}
+
+export default App;
