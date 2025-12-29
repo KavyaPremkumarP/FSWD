@@ -1,0 +1,49 @@
+EventRegistration.jsx
+
+function EventRegistration() {
+  const registerEvent = () => {
+    const name = prompt("Enter Participant Name:");
+    if (!name) {
+      alert("Registration cancelled!");
+      return;
+    }
+
+    const eventName = prompt("Enter Event Name:");
+    const email = prompt("Enter Email ID:");
+
+    const confirmRegister = confirm(
+      "Confirm Event Registration:\n\n" +
+      "Participant Name: " + name +
+      "\nEvent Name: " + eventName +
+      "\nEmail: " + email
+    );
+
+    if (confirmRegister) {
+      alert(
+        "✅ Registration Successful!\n" +
+        "Thank you, " + name + ", for registering."
+      );
+    } else {
+      alert("❌ Registration Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Event Registration</h2>
+      <button onClick={registerEvent}>Register</button>
+    </div>
+  );
+}
+
+export default EventRegistration;
+
+App.jsx
+import EventRegistration from "./core concepts/helloworld/EventRegistration";
+
+function App() {
+  return <EventRegistration />;
+}
+
+export default App;
+
