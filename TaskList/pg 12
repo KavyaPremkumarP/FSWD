@@ -1,0 +1,50 @@
+TaskList.jsx
+
+import { useState } from "react";
+
+export default function TaskList() {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (e) => {
+    e.preventDefault();
+    setTasks([...tasks, task]);
+    setTask("");
+  };
+
+  const removeTask = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
+  return (
+    <>
+      <h3>Task Dashboard</h3>
+
+      <form onSubmit={addTask}>
+        <input
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="Enter task"
+          required
+        />
+        <button>Add</button>
+      </form>
+
+      {tasks.map((t, i) => (
+        <div key={i}>
+          {t}
+          <button onClick={() => removeTask(i)}>❌</button>
+        </div>
+      ))}
+    </>
+  );
+}
+
+
+App.jsx
+import TaskList from "./core concepts/helloworld/TaskList";
+
+export default function App() {
+  return <TaskList />;
+}
+
