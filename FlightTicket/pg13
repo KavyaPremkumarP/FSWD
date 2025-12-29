@@ -1,0 +1,52 @@
+FlightTicket.jsx
+
+function FlightTicket() {
+  const bookTicket = () => {
+    const name = prompt("Enter Passenger Name:");
+    if (!name) {
+      alert("Booking cancelled!");
+      return;
+    }
+
+    const from = prompt("Enter Source City:");
+    const to = prompt("Enter Destination City:");
+    const tickets = prompt("Enter Number of Tickets:");
+
+    const confirmBooking = confirm(
+      "Confirm Booking Details:\n\n" +
+      "Name: " + name +
+      "\nFrom: " + from +
+      "\nTo: " + to +
+      "\nTickets: " + tickets
+    );
+
+    if (confirmBooking) {
+      alert(
+        "✅ Ticket Booked Successfully!\n" +
+        "Passenger: " + name + "\n" +
+        "Route: " + from + " → " + to
+      );
+    } else {
+      alert("❌ Booking Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Flight Ticket Booking</h2>
+      <button onClick={bookTicket}>Book Ticket</button>
+    </div>
+  );
+}
+
+export default FlightTicket;
+
+App.jsx
+import FlightTicket from "./core concepts/helloworld/FlightTicket";
+
+function App() {
+  return <FlightTicket />;
+}
+
+export default App;
+
