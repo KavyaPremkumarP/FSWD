@@ -1,0 +1,91 @@
+Blog.jsx
+
+import { useState } from "react";
+
+function Blog() {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  const addComment = (e) => {
+    e.preventDefault();
+    if (comment.trim() === "") return;
+    setComments([...comments, comment]);
+    setComment("");
+  };
+
+  return (
+    <div style={styles.container}>
+      
+      {/* Blog Section */}
+      <div style={styles.blog}>
+        <h2>My Blog Post</h2>
+        <p>
+          This is a simple responsive blog layout built using React.
+          Users can add comments and see them update in real time.
+        </p>
+
+        {/* Comment Form */}
+        <form onSubmit={addComment}>
+          <input
+            style={styles.input}
+            placeholder="Write a comment..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button style={styles.button}>Post</button>
+        </form>
+
+        {/* Comments */}
+        <h4>Comments</h4>
+        {comments.length === 0 ? (
+          <p>No comments yet.</p>
+        ) : (
+          comments.map((c, i) => (
+            <div key={i} style={styles.comment}>
+              {c}
+            </div>
+          ))
+        )}
+      </div>
+
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    padding: "20px"
+  },
+  blog: {
+    maxWidth: "600px",
+    width: "100%"
+  },
+  input: {
+    width: "70%",
+    padding: "8px"
+  },
+  button: {
+    padding: "8px 12px",
+    marginLeft: "5px"
+  },
+  comment: {
+    border: "1px solid #ccc",
+    padding: "8px",
+    marginTop: "5px",
+    borderRadius: "4px"
+  }
+};
+
+export default Blog;
+
+App.jsx
+import Blog from "./core concepts/helloworld/Blog";
+
+function App() {
+  return <Blog />;
+}
+
+export default App;
+
