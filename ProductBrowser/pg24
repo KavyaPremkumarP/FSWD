@@ -1,0 +1,77 @@
+ProductBrowser.jsx
+
+import { Link, Routes, Route } from "react-router-dom";
+
+function Category({ title, products }) {
+  return (
+    <div>
+      <h3>{title}</h3>
+      {products.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+    </div>
+  );
+}
+
+function ProductBrowser() {
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Product Browser</h2>
+
+      {/* Navigation */}
+      <nav style={{ marginBottom: "15px" }}>
+        <Link to="/electronics">Electronics</Link> |{" "}
+        <Link to="/fashion">Fashion</Link> |{" "}
+        <Link to="/books">Books</Link>
+      </nav>
+
+      {/* Category Routing */}
+      <Routes>
+        <Route
+          path="/electronics"
+          element={
+            <Category
+              title="Electronics"
+              products={["Laptop", "Mobile", "Headphones"]}
+            />
+          }
+        />
+        <Route
+          path="/fashion"
+          element={
+            <Category
+              title="Fashion"
+              products={["T-Shirt", "Jeans", "Shoes"]}
+            />
+          }
+        />
+        <Route
+          path="/books"
+          element={
+            <Category
+              title="Books"
+              products={["React Guide", "JavaScript Basics", "Data Science"]}
+            />
+          }
+        />
+      </Routes>
+    </div>
+  );
+}
+
+export default ProductBrowser;
+
+App.jsx
+import { BrowserRouter } from "react-router-dom";
+import ProductBrowser from "./ProductBrowser";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <ProductBrowser />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
