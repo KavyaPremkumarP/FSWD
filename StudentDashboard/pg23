@@ -1,0 +1,63 @@
+ StudentDashboard.jsx
+
+import { useState } from "react";
+
+function StudentDashboard() {
+  const [page, setPage] = useState("dashboard");
+
+  const students = [
+    { id: 1, name: "Kavya", course: "Computer Science" },
+    { id: 2, name: "Rahul", course: "Information Technology" },
+    { id: 3, name: "Ananya", course: "Data Science" }
+  ];
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Student Management Dashboard</h2>
+
+      {/* Navigation */}
+      <div style={{ marginBottom: "20px" }}>
+        <button onClick={() => setPage("dashboard")}>Dashboard</button>{" "}
+        <button onClick={() => setPage("students")}>Students</button>{" "}
+        <button onClick={() => setPage("about")}>About</button>
+      </div>
+
+      {/* Content */}
+      {page === "dashboard" && (
+        <div>
+          <h3>Dashboard</h3>
+          <p>Total Students: {students.length}</p>
+        </div>
+      )}
+
+      {page === "students" && (
+        <div>
+          <h3>Student List</h3>
+          {students.map((s) => (
+            <p key={s.id}>
+              {s.name} - {s.course}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {page === "about" && (
+        <div>
+          <h3>About</h3>
+          <p>This is a simple student management system built using React.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default StudentDashboard;
+
+App.jsx
+import StudentDashboard from "./StudentDashboard";
+
+function App() {
+  return <StudentDashboard />;
+}
+
+export default App;
