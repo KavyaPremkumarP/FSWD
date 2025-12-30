@@ -1,0 +1,62 @@
+ProductList.jsx
+
+import { useState } from "react";
+
+function ProductList() {
+  const products = [
+    { id: 1, name: "Laptop", price: 50000 },
+    { id: 2, name: "Mobile", price: 20000 },
+    { id: 3, name: "Headphones", price: 3000 }
+  ];
+
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  return (
+    <div style={{ padding: "20px", display: "flex", gap: "40px" }}>
+      
+      {/* Product Listing */}
+      <div>
+        <h3>Products</h3>
+        {products.map((p) => (
+          <div key={p.id} style={{ marginBottom: "10px" }}>
+            <p>
+              {p.name} - ₹{p.price}
+            </p>
+            <button onClick={() => addToCart(p)}>Add to Cart</button>
+          </div>
+        ))}
+      </div>
+
+      {/* Cart Section */}
+      <div>
+        <h3>Cart</h3>
+        {cart.length === 0 ? (
+          <p>No items in cart</p>
+        ) : (
+          cart.map((item, index) => (
+            <p key={index}>
+              {item.name} - ₹{item.price}
+            </p>
+          ))
+        )}
+      </div>
+
+    </div>
+  );
+}
+
+export default ProductList;
+
+App.jsx
+import ProductList from "./core concepts/helloworld/Blog";
+
+function App() {
+  return <ProductList />;
+}
+
+export default App;
+
